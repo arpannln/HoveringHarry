@@ -87,8 +87,10 @@ var HoveringHarry = {
     //position adjustment, Harry is not allowed to leave the screen breh
 
     if (this.character.y < 0) this.character.y = 0;
-    if (this.character.y + this.character.height > 500) this.character.y = 500;
-
+    if (this.character.y + this.character.height > 500) {
+      this.character.y = 500 - this.character.height;
+      this.character.velocity = this.character.velocity - this.character.gravity;
+    }
 
     this.ctx.save();
     this.ctx.translate(this.character.x, this.character.y);
