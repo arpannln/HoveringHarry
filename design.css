@@ -1,0 +1,7 @@
+canvas {
+  background: url('./Castle.jpg');
+  background-repeat: no-repeat;
+  background-size: 800px 500px;
+  margin-left: 75px;
+  margin-top: 50px;
+}
