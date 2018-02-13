@@ -24,6 +24,14 @@ var HoveringHarry = {
     cloudrate: 3,
   },
 
+  snitch : {
+    x: null,
+    y: null,
+    velocity: 5,
+    width: 20,
+    height: 20,
+  },
+
   score: 0,
 
   click: false,
@@ -33,6 +41,8 @@ var HoveringHarry = {
   gameover: false,
 
   obstacleDelay: 0, //to stop massing of obstacles
+
+  snitchDelay: 100,
 
   highestScore: 0,
 
@@ -65,7 +75,10 @@ var HoveringHarry = {
     document.onmousedown = function(e) {
       if (event.target.id === "HoveringHarryCanvas") {
         that.click = true;
-
+        if (that.gameover === true) {
+          // that.resetGame();
+          // that.init();
+        }
       }
 
     };
@@ -156,6 +169,41 @@ var HoveringHarry = {
       this.ctx.restore();
     }
   },
+
+  createSnitch: function() {
+    this.snitch.x = 800;
+    this.snitch.y = Math.floor(Math.random()*500);
+    let x = this.snitch.x;
+    let y = this.snitch.y;
+    this.ctx.save();
+    this.ctx.translate(x, y);
+
+    var snitch = new Image();
+    snitch.src = "http://res.cloudinary.com/arpannln/image/upload/v1518497984/snitch.png";
+    var that = this;
+    snitch.onload = function() {
+      that.ctx.drawImage(snitch, x, y, that.snitch.width, that.snitch.height);
+    };
+
+    this.ctx.restore();
+  },
+
+  recreateSnitch: function() {
+    this.snitch.x -= this.snitch.velocity;
+    let x = this.snitch.x;
+    let y = this.snitch.y;
+    this.ctx.save();
+    this.ctx.translate(x, y);
+
+    var snitch = new Image();
+    snitch.src = "http://res.cloudinary.com/arpannln/image/upload/v1518497984/snitch.png";
+    var that = this;
+    snitch.onload = function() {
+      that.ctx.drawImage(snitch, x, y, that.snitch.width, that.snitch.height);
+    };
+
+    this.ctx.restore();
+  },
   //loop through all the obstacles and see if theres an overlap between character and obs
   checkImpact: function () {
     for (var i = 0; i < this.obstacles.x.length; i++) {
@@ -163,43 +211,48 @@ var HoveringHarry = {
         this.character.x + this.character.width >= this.obstacles.x[i]
       ) {
         if (
-          (!(this.character.y + 5 >= this.obstacles.y[i] + this.obstacles.height ||
+          (!(this.character.y + 25 >= this.obstacles.y[i] + this.obstacles.height ||
             this.character.y + this.character.height - 30 <= this.obstacles.y[i])) &&
             (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*1/5))) &&
             (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width*2/5)))
           ) {
+            console.log(1);
             this.endGame();
           }
         if (
-          (!(this.character.y  >= this.obstacles.y[i] + this.obstacles.height ||
+          (!(this.character.y + 15 >= this.obstacles.y[i] + this.obstacles.height ||
             this.character.y + this.character.height - 20 <= this.obstacles.y[i])) &&
             (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*1/5))) &&
             (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width*2/5)))
           ) {
+            console.log(2);
             this.endGame();
           }
         if (
-         (!(this.character.y + 3 >= this.obstacles.y[i] + this.obstacles.height ||
-         this.character.y + this.character.height <= this.obstacles.y[i])) &&
+         (!(this.character.y + 2 >= this.obstacles.y[i] + this.obstacles.height ||
+         this.character.y + this.character.height - 20 <= this.obstacles.y[i])) &&
          (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*2/5))) &&
          (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width*3/5)))
         ) {
+            console.log(3);
             this.endGame();
           }
         if (
-          (!(this.character.y  >= this.obstacles.y[i] + this.obstacles.height ||
-            this.character.y + this.character.height - 20 <= this.obstacles.y[i])) &&
+          (!(this.character.y + 50 >= this.obstacles.y[i] + this.obstacles.height ||
+            this.character.y + this.character.height - 40 <= this.obstacles.y[i])) &&
             (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*3/5))) &&
             (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width*4/5)))
           ) {
+            console.log(4);
             this.endGame();
           }
         if (
-          (!(this.character.y + 10 >= this.obstacles.y[i] + this.obstacles.height ||
-            this.character.y + this.character.height - 32 <= this.obstacles.y[i])) &&
+          (!(this.character.y + 70 >= this.obstacles.y[i] + this.obstacles.height ||
+            this.character.y + this.character.height - 70 <= this.obstacles.y[i])) &&
             (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*4/5))) &&
             (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width)))
           ) {
+            console.log(5);
             this.endGame();
           }
         }
@@ -225,7 +278,7 @@ var HoveringHarry = {
   displayScore: function() {
     this.ctx.font = '20pt Calibri';
     this.ctx.fillStyle = 'white';
-    this.ctx.fillText(`Highest: ${this.highestScore} Score: ${this.score}`, 570, 50);
+    this.ctx.fillText(`Highest: ${this.highestScore} Score: ${this.score}`, 500, 50);
   },
 
   resetGame: function() {
@@ -244,6 +297,13 @@ var HoveringHarry = {
       this.obstacleDelay += 1;
     }
     this.recreateObstacles();
+    if (this.snitchDelay === 300) {
+      this.createSnitch();
+      this.snitchDelay = 0;
+    } else {
+      this.snitchDelay += 1;
+    }
+    this.recreateSnitch();
     this.checkImpact();
     this.displayScore();
     this.score ++;
