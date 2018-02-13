@@ -1,8 +1,14 @@
+/*I do not own any of the images displayed on this site**/
+
+body {
+  padding: 0;
+  margin: 0;
+}
 canvas {
   background: url('https://res.cloudinary.com/arpannln/image/upload/v1518505495/hogwarts-castle-harry-potter-166431.jpg');
   background-repeat: no-repeat;
   background-size: 800px 500px;
-  margin-left: 125px;
+  margin-left: 200px;
   margin-top: 130px;
   position: absolute;
   z-index: 3;
@@ -28,8 +34,8 @@ div {
   position: absolute;
   font-size: 45px;
   color: red;
-  margin-left: 320px;
-  margin-top: 280px;
+  margin-left: 380px;
+  margin-top: 300px;
   display: flex;
   width: 700px;
   height: 200px;
@@ -45,7 +51,7 @@ body > img {
   display: flex;
   width: 820px;
   height: 150px;
-  margin-left: 125px;
+  margin-left: 200px;
   z-index: 1;
   text-align: center;
   justify-content: center;
@@ -61,7 +67,7 @@ body > img {
   width: 200px;
   height: 650px;
   margin-top: 0px;
-  margin-left: 940px;
+  margin-left: 1010px;
   z-index: 1;
   text-align: center;
   justify-content: center;
