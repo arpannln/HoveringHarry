@@ -4,7 +4,7 @@ var HoveringHarry = {
   //give our character some attributes
   character : {
     x: 50,
-    y: 0,
+    y: 200,
     velocity: 0,
     degree: 0,
     width : 100,
@@ -34,7 +34,7 @@ var HoveringHarry = {
 
   score: 0,
 
-  click: false,
+  click: true,
 
   canvas: null,
 
@@ -46,7 +46,20 @@ var HoveringHarry = {
 
   highestScore: 0,
 
-
+  resetGame: function() {
+    var body = document.getElementById("HoveringHarry");
+    let child = document.getElementById("gameover");
+    let child2 = document.getElementById("HoveringHarryCanvas");
+    console.log(child);
+    body.removeChild(child);
+    body.removeChild(child2);
+    this.obstacles.x = [];
+    this.obstacles.y = [];
+    this.obstacles.velocity = 3;
+    this.obstacles.rate = 3;
+    this.gameover = false;
+    this.newRender = null;
+  },
   //create main gameplay canvas
   createCanvas: function() {
     var canvas = document.createElement("canvas");
@@ -82,11 +95,11 @@ var HoveringHarry = {
     var that = this;
     document.onmousedown = function(e) {
       if (event.target.id === "HoveringHarryCanvas") {
-        that.click = false;
         if (that.gameover === true) {
-          // that.resetGame();
-          // that.init();
+          that.resetGame();
+          that.init();
         }
+        that.click = false;
       }
 
     };
@@ -247,12 +260,13 @@ var HoveringHarry = {
       ) {
         if (
           (!(this.character.y + 12 >= this.obstacles.y[i] + this.obstacles.height ||
-            this.character.y + this.character.height - 8 <= this.obstacles.y[i])) &&
+            this.character.y + this.character.height - 14 <= this.obstacles.y[i])) &&
             (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*1/5))) &&
             (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width*2/5)))
           ) {
             console.log(1);
             this.endGame();
+            break;
           }
         if (
           (!(this.character.y + 15 >= this.obstacles.y[i] + this.obstacles.height ||
@@ -262,6 +276,7 @@ var HoveringHarry = {
           ) {
             console.log(2);
             this.endGame();
+            break;
           }
         if (
          (!(this.character.y + 20 >= this.obstacles.y[i] + this.obstacles.height ||
@@ -271,6 +286,7 @@ var HoveringHarry = {
         ) {
             console.log(3);
             this.endGame();
+            break;
           }
         if (
           (!(this.character.y + 50 >= this.obstacles.y[i] + this.obstacles.height ||
@@ -280,6 +296,7 @@ var HoveringHarry = {
           ) {
             console.log(4);
             this.endGame();
+            break;
           }
         if (
           (!(this.character.y + 70 >= this.obstacles.y[i] + this.obstacles.height ||
@@ -302,7 +319,9 @@ var HoveringHarry = {
     let gameover = document.createElement("h1");
     gameover.id = "gameover";
     let text = document.createTextNode("You're a Muggle Harry");
+    // let text2 = document.createTextNode("Click to Prove Me Wrong");
     gameover.appendChild(text);
+    // gameover.appendChild(text2);
     clearInterval(this.newRender);
     var body = document.getElementById("HoveringHarry");
     body.appendChild(gameover);
@@ -316,11 +335,7 @@ var HoveringHarry = {
     this.ctx.fillText(`Highest: ${this.highestScore} Score: ${this.score}`, 500, 50);
   },
 
-  resetGame: function() {
-    var body = document.getElementById("HoveringHarry");
-    let child = document.getElementById("gameover");
-    body.removeChild(child);
-  },
+
 
   draw: function() {
     this.ctx.clearRect(0, 0, 800, 500);

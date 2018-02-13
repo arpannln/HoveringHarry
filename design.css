@@ -3,7 +3,7 @@ canvas {
   background-repeat: no-repeat;
   background-size: 800px 500px;
   margin-left: 125px;
-  margin-top: 80px;
+  margin-top: 130px;
   position: absolute;
   z-index: 3;
   display: flex;
@@ -24,7 +24,7 @@ div {
 }
 
 #gameover {
-  font-family: "Open Sans";
+  font-family: "Calibri";
   position: absolute;
   font-size: 45px;
   color: red;
@@ -36,15 +36,15 @@ div {
   z-index: 5;
 }
 
-body > h2 {
+body > img {
   position: absolute;
   background: black;
   font-size: 40px;
-  color: white;
+  color: #FFD700;
   font-family: "Calibri";
   display: flex;
   width: 820px;
-  height: 100px;
+  height: 150px;
   margin-left: 125px;
   z-index: 1;
   text-align: center;
@@ -58,15 +58,11 @@ body > h2 {
   color: white;
   font-family: "Calibri";
   display: flex;
-  width: 820px;
-  height: 100px;
-  margin-top: 600px;
-  margin-left: 125px;
+  width: 200px;
+  height: 650px;
+  margin-top: 0px;
+  margin-left: 940px;
   z-index: 1;
   text-align: center;
   justify-content: center;
-}
-
-.instructions > span {
-  color: #EEE8AA;
 }
