@@ -227,8 +227,8 @@ var HoveringHarry = {
         this.character.x + this.character.width >= this.obstacles.x[i]
       ) {
         if (
-          (!(this.character.y + 5 >= this.obstacles.y[i] + this.obstacles.height ||
-            this.character.y + this.character.height - 15 <= this.obstacles.y[i])) &&
+          (!(this.character.y + 1 >= this.obstacles.y[i] + this.obstacles.height ||
+            this.character.y + this.character.height - 11 <= this.obstacles.y[i])) &&
             (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*1/5))) &&
             (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width*2/5)))
           ) {
@@ -282,7 +282,7 @@ var HoveringHarry = {
     this.gameover = true;
     let gameover = document.createElement("h1");
     gameover.id = "gameover";
-    let text = document.createTextNode("GG Harry");
+    let text = document.createTextNode("You suck <3");
     gameover.appendChild(text);
     clearInterval(this.newRender);
     var body = document.getElementById("HoveringHarry");
