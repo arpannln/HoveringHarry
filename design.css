@@ -1,5 +1,5 @@
 canvas {
-  background: url('./Castle.jpg');
+  background: url('https://res.cloudinary.com/arpannln/image/upload/v1518502585/castle.jpg');
   background-repeat: no-repeat;
   background-size: 800px 500px;
   margin-left: 125px;
@@ -16,19 +16,6 @@ body > h1 {
   color: red;
   margin-left: 435px;
   margin-top: 280px;
-  display: flex;
-  width: 300px;
-  height: 200px;
-  z-index: 5;
-}
-
-body > h2 {
-  font-family: "Open Sans";
-  position: absolute;
-  font-size: 20px;
-  color: white;
-  margin-left: 700px;
-  margin-top: 80px;
   display: flex;
   width: 300px;
   height: 200px;

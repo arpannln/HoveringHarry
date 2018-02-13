@@ -28,8 +28,8 @@ var HoveringHarry = {
     x: null,
     y: null,
     velocity: 5,
-    width: 20,
-    height: 20,
+    width: 30,
+    height: 30,
   },
 
   score: 0,
@@ -45,6 +45,7 @@ var HoveringHarry = {
   snitchDelay: 100,
 
   highestScore: 0,
+
 
   //create main gameplay canvas
   createCanvas: function() {
@@ -190,6 +191,8 @@ var HoveringHarry = {
 
   recreateSnitch: function() {
     this.snitch.x -= this.snitch.velocity;
+    let options = [-this.snitch.velocity, this.snitch.velocity];
+    this.snitch.y = this.snitch.y + options[Math.floor(Math.random()*options.length)];
     let x = this.snitch.x;
     let y = this.snitch.y;
     this.ctx.save();
@@ -203,6 +206,15 @@ var HoveringHarry = {
     };
 
     this.ctx.restore();
+  },
+
+  caughtSnitch: function() {
+    if ((this.snitch.x > this.character.x && this.snitch.x < (this.character.x + this.character.width)) &&
+       (this.snitch.y > this.character.y && this.snitch.y < (this.character.y + this.character.height))) {
+         this.score += 100;
+         this.snitch.y = 900;
+         this.snitch.x = 1500;
+    }
   },
   //loop through all the obstacles and see if theres an overlap between character and obs
   checkImpact: function () {
@@ -229,7 +241,7 @@ var HoveringHarry = {
             this.endGame();
           }
         if (
-         (!(this.character.y + 2 >= this.obstacles.y[i] + this.obstacles.height ||
+         (!(this.character.y + 20 >= this.obstacles.y[i] + this.obstacles.height ||
          this.character.y + this.character.height - 20 <= this.obstacles.y[i])) &&
          (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*2/5))) &&
          (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width*3/5)))
@@ -293,6 +305,7 @@ var HoveringHarry = {
     if (this.obstacleDelay === 50) {
       this.createObstacle();
       this.obstacleDelay = 0;
+      this.score += 20;
     } else {
       this.obstacleDelay += 1;
     }
@@ -304,9 +317,9 @@ var HoveringHarry = {
       this.snitchDelay += 1;
     }
     this.recreateSnitch();
+    this.caughtSnitch();
     this.checkImpact();
     this.displayScore();
-    this.score ++;
   }
 
 
