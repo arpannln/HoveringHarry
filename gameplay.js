@@ -21,7 +21,7 @@ var HoveringHarry = {
     velocity: 3,
     width: 150,
     height: 80,
-    cloudrate: 3,
+    rate: 3,
   },
 
   snitch : {
@@ -135,7 +135,7 @@ var HoveringHarry = {
       this.ctx.translate(x, y);
 
       var cloud = new Image();
-      cloud.src = "http://res.cloudinary.com/arpannln/image/upload/v1518456320/cloud.png";
+      cloud.src = "https://res.cloudinary.com/arpannln/image/upload/v1518505067/dementor.png";
       var that = this;
       cloud.onload = function() {
         that.ctx.drawImage(cloud, x, y, that.obstacles.width, that.obstacles.height);
@@ -146,11 +146,14 @@ var HoveringHarry = {
   },
 
   recreateObstacles: function() {
+    if (this.score % 500 === 0 && this.score !== 0) {
+      this.obstacles.rate += .05;
+    }
     for (var i = 0; i < this.obstacles.x.length; i++) {
       let x = this.obstacles.x[i];
       let y = this.obstacles.y[i];
       if (x > -100) {
-        x -= this.obstacles.cloudrate;
+        x -= this.obstacles.rate;
         this.obstacles.x[i] = x;
       } else {
         this.obstacles.x.shift();
@@ -161,7 +164,7 @@ var HoveringHarry = {
       this.ctx.translate(x, y);
 
       var cloud = new Image();
-      cloud.src = "http://res.cloudinary.com/arpannln/image/upload/v1518456320/cloud.png";
+      cloud.src = "https://res.cloudinary.com/arpannln/image/upload/v1518505067/dementor.png";
       var that = this;
       cloud.onload = function() {
         that.ctx.drawImage(cloud, x, y, that.obstacles.width, that.obstacles.height);
@@ -214,6 +217,7 @@ var HoveringHarry = {
          this.score += 100;
          this.snitch.y = 900;
          this.snitch.x = 1500;
+         this.obstacles.rate = 3;
     }
   },
   //loop through all the obstacles and see if theres an overlap between character and obs
@@ -223,8 +227,8 @@ var HoveringHarry = {
         this.character.x + this.character.width >= this.obstacles.x[i]
       ) {
         if (
-          (!(this.character.y + 25 >= this.obstacles.y[i] + this.obstacles.height ||
-            this.character.y + this.character.height - 30 <= this.obstacles.y[i])) &&
+          (!(this.character.y + 5 >= this.obstacles.y[i] + this.obstacles.height ||
+            this.character.y + this.character.height - 15 <= this.obstacles.y[i])) &&
             (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*1/5))) &&
             (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width*2/5)))
           ) {
@@ -242,7 +246,7 @@ var HoveringHarry = {
           }
         if (
          (!(this.character.y + 20 >= this.obstacles.y[i] + this.obstacles.height ||
-         this.character.y + this.character.height - 20 <= this.obstacles.y[i])) &&
+         this.character.y + this.character.height - 25 <= this.obstacles.y[i])) &&
          (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*2/5))) &&
          (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width*3/5)))
         ) {
