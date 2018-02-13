@@ -11,7 +11,7 @@ var HoveringHarry = {
     height : 60,
     fastest : 5,
     acceleration: 0.2,
-    gravity : .15,
+    gravity : .05,
     image : "https://res.cloudinary.com/arpannln/image/upload/v1518485318/DopeHarry.png",
   },
 
@@ -66,16 +66,23 @@ var HoveringHarry = {
 
   init: function() {
     this.canvas = this.createCanvas();
+    // let that = this;
+    // that.spaceListener = that.spaceListener.bind(this);
+    // that.stop = that.stop.bind(this);
+    // document.addEventListener("keyup", that.stop, false);
+    // document.addEventListener("keydown", that.spaceListener, false);
     this.mouseListener();
     this.createCharacter();
     this.newRender = setInterval('HoveringHarry.draw()', 10);
   },
+
+
   //record user mouse interactions
   mouseListener: function() {
     var that = this;
     document.onmousedown = function(e) {
       if (event.target.id === "HoveringHarryCanvas") {
-        that.click = true;
+        that.click = false;
         if (that.gameover === true) {
           // that.resetGame();
           // that.init();
@@ -85,9 +92,21 @@ var HoveringHarry = {
     };
 
     document.onmouseup = function() {
-      that.click = false;
+      that.click = true;
     };
   },
+  //spacebar listener
+  // stop: function (e) {
+  //   e.preventDefault();
+  //   this.click = false;
+  // },
+  //
+  // spaceListener: function(e) {
+  //   if (e.keyCode === 32) {
+  //     e.preventDefault();
+  //     this.click = true;
+  //   }
+  // },
 
   createCharacter: function() {
 
@@ -227,8 +246,8 @@ var HoveringHarry = {
         this.character.x + this.character.width >= this.obstacles.x[i]
       ) {
         if (
-          (!(this.character.y + 1 >= this.obstacles.y[i] + this.obstacles.height ||
-            this.character.y + this.character.height - 11 <= this.obstacles.y[i])) &&
+          (!(this.character.y + 12 >= this.obstacles.y[i] + this.obstacles.height ||
+            this.character.y + this.character.height - 8 <= this.obstacles.y[i])) &&
             (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*1/5))) &&
             (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width*2/5)))
           ) {
@@ -282,7 +301,7 @@ var HoveringHarry = {
     this.gameover = true;
     let gameover = document.createElement("h1");
     gameover.id = "gameover";
-    let text = document.createTextNode("You suck <3");
+    let text = document.createTextNode("You're a Muggle Harry");
     gameover.appendChild(text);
     clearInterval(this.newRender);
     var body = document.getElementById("HoveringHarry");
