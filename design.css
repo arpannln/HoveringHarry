@@ -10,11 +10,25 @@ canvas {
 }
 
 body > h1 {
+  font-family: "Open Sans";
   position: absolute;
   font-size: 45px;
   color: red;
   margin-left: 435px;
   margin-top: 280px;
+  display: flex;
+  width: 300px;
+  height: 200px;
+  z-index: 5;
+}
+
+body > h2 {
+  font-family: "Open Sans";
+  position: absolute;
+  font-size: 20px;
+  color: white;
+  margin-left: 700px;
+  margin-top: 80px;
   display: flex;
   width: 300px;
   height: 200px;

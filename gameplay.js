@@ -7,12 +7,12 @@ var HoveringHarry = {
     y: 0,
     velocity: 0,
     degree: 0,
-    width : 50,
-    height : 50,
+    width : 100,
+    height : 60,
     fastest : 5,
     acceleration: 0.2,
     gravity : .15,
-    image : "HarryHead.jpeg",
+    image : "https://res.cloudinary.com/arpannln/image/upload/v1518485318/DopeHarry.png",
   },
 
   obstacles : {
@@ -24,6 +24,8 @@ var HoveringHarry = {
     cloudrate: 3,
   },
 
+  score: 0,
+
   click: false,
 
   canvas: null,
@@ -31,6 +33,8 @@ var HoveringHarry = {
   gameover: false,
 
   obstacleDelay: 0, //to stop massing of obstacles
+
+  highestScore: 0,
 
   //create main gameplay canvas
   createCanvas: function() {
@@ -159,9 +163,43 @@ var HoveringHarry = {
         this.character.x + this.character.width >= this.obstacles.x[i]
       ) {
         if (
-          !(this.character.y  >= this.obstacles.y[i] + this.obstacles.height ||
-          this.character.y + this.character.height <= this.obstacles.y[i])
+          (!(this.character.y + 5 >= this.obstacles.y[i] + this.obstacles.height ||
+            this.character.y + this.character.height - 30 <= this.obstacles.y[i])) &&
+            (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*1/5))) &&
+            (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width*2/5)))
+          ) {
+            this.endGame();
+          }
+        if (
+          (!(this.character.y  >= this.obstacles.y[i] + this.obstacles.height ||
+            this.character.y + this.character.height - 20 <= this.obstacles.y[i])) &&
+            (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*1/5))) &&
+            (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width*2/5)))
+          ) {
+            this.endGame();
+          }
+        if (
+         (!(this.character.y + 3 >= this.obstacles.y[i] + this.obstacles.height ||
+         this.character.y + this.character.height <= this.obstacles.y[i])) &&
+         (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*2/5))) &&
+         (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width*3/5)))
         ) {
+            this.endGame();
+          }
+        if (
+          (!(this.character.y  >= this.obstacles.y[i] + this.obstacles.height ||
+            this.character.y + this.character.height - 20 <= this.obstacles.y[i])) &&
+            (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*3/5))) &&
+            (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width*4/5)))
+          ) {
+            this.endGame();
+          }
+        if (
+          (!(this.character.y + 10 >= this.obstacles.y[i] + this.obstacles.height ||
+            this.character.y + this.character.height - 32 <= this.obstacles.y[i])) &&
+            (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*4/5))) &&
+            (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width)))
+          ) {
             this.endGame();
           }
         }
@@ -180,6 +218,20 @@ var HoveringHarry = {
     clearInterval(this.newRender);
     var body = document.getElementById("HoveringHarry");
     body.appendChild(gameover);
+    if (this.score > this.highestScore) this.highestScore = this.score;
+    this.score = 0;
+  },
+
+  displayScore: function() {
+    this.ctx.font = '20pt Calibri';
+    this.ctx.fillStyle = 'white';
+    this.ctx.fillText(`Highest: ${this.highestScore} Score: ${this.score}`, 570, 50);
+  },
+
+  resetGame: function() {
+    var body = document.getElementById("HoveringHarry");
+    let child = document.getElementById("gameover");
+    body.removeChild(child);
   },
 
   draw: function() {
@@ -193,6 +245,8 @@ var HoveringHarry = {
     }
     this.recreateObstacles();
     this.checkImpact();
+    this.displayScore();
+    this.score ++;
   }
 
 
@@ -208,3 +262,9 @@ var HoveringHarry = {
 // this.ctx.fill();
 //
 // this.ctx.restore();
+// if (
+//  (!(this.character.y  >= this.obstacles.y[i] + this.obstacles.height ||
+//  this.character.y + this.character.height <= this.obstacles.y[i])) &&
+//  (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*2/5))) &&
+//  (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width*3/5)))
+// ) {
