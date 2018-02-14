@@ -79,11 +79,11 @@ var HoveringHarry = {
 
   init: function() {
     this.canvas = this.createCanvas();
-    // let that = this;
-    // that.spaceListener = that.spaceListener.bind(this);
-    // that.stop = that.stop.bind(this);
-    // document.addEventListener("keyup", that.stop, false);
-    // document.addEventListener("keydown", that.spaceListener, false);
+    let that = this;
+    that.spaceListener = that.spaceListener.bind(this);
+    that.stop = that.stop.bind(this);
+    document.addEventListener("keyup", that.stop, false);
+    document.addEventListener("keydown", that.spaceListener, false);
     this.mouseListener();
     this.createCharacter();
     this.newRender = setInterval('HoveringHarry.draw()', 10);
@@ -109,17 +109,21 @@ var HoveringHarry = {
     };
   },
   //spacebar listener
-  // stop: function (e) {
-  //   e.preventDefault();
-  //   this.click = false;
-  // },
-  //
-  // spaceListener: function(e) {
-  //   if (e.keyCode === 32) {
-  //     e.preventDefault();
-  //     this.click = true;
-  //   }
-  // },
+  stop: function (e) {
+    e.preventDefault();
+    this.click = true;
+  },
+
+  spaceListener: function(e) {
+    if (e.keyCode === 32) {
+      e.preventDefault();
+      if (this.gameover === true) {
+        this.resetGame();
+        this.init();
+      }
+      this.click = false;
+    }
+  },
 
   createCharacter: function() {
 
