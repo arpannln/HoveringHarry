@@ -13,7 +13,9 @@ canvas {
   position: absolute;
   z-index: 3;
   display: flex;
-  border: 10px solid black;
+  border-top: 10px solid black;
+  border-left: 10px solid black;
+  border-bottom: 10px solid black;
 }
 div {
   position: absolute;
@@ -30,26 +32,28 @@ div {
 }
 
 #gameover {
-  font-family: "Open Sans";
+  font-family: "Creepster";
+  font-weight: 300;
+  font-style: italic;
   position: absolute;
   font-size: 45px;
   color: red;
-  margin-left: 390px;
-  margin-top: 300px;
+  margin-left: 400px;
+  margin-top: 350px;
   display: flex;
   width: 480px;
   height: 50px;
   z-index: 5;
 }
 
-body > img {
+.title {
   position: absolute;
   background: black;
   font-size: 40px;
   color: #FFD700;
   font-family: "Open Sans";
   display: flex;
-  width: 820px;
+  width: 810px;
   height: 150px;
   margin-left: 200px;
   z-index: 1;
@@ -60,15 +64,26 @@ body > img {
 .instructions {
   position: absolute;
   background: black;
-  font-size: 20px;
+  font-size: 18px;
   color: white;
-  font-family: "Open Sans";
+  font-family: "Open Sans", sans-serif;
   display: flex;
-  width: 240px;
+  width: 200px;
   height: 650px;
   margin-top: 0px;
-  margin-left: 1020px;
+  margin-left: 1010px;
+  font-weight: 300;
   z-index: 1;
   text-align: center;
   justify-content: center;
+  flex-direction: column;
+  border-right: 15px solid black;
+  border-left: 10px solid black;
+}
+
+.logo {
+  width: 100px;
+  height: 100px;
+  margin-top: 80px;
+  margin-left: 50px;
 }
