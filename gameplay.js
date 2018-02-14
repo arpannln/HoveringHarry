@@ -2,6 +2,7 @@
 
 var HoveringHarry = {
   //give our character some attributes
+  //add lightning flying from top
   character : {
     x: 50,
     y: 200,
@@ -334,9 +335,9 @@ var HoveringHarry = {
   },
 
   displayScore: function() {
-    this.ctx.font = '20pt Calibri';
+    this.ctx.font = '15pt Calibri';
     this.ctx.fillStyle = 'white';
-    this.ctx.fillText(`Highest: ${this.highestScore} Score: ${this.score}`, 500, 50);
+    this.ctx.fillText(`Highest: ${this.highestScore} Score: ${this.score}`, 600, 40);
   },
 
 
