@@ -25,12 +25,29 @@ var HoveringHarry = {
     rate: 3,
   },
 
+  lightning : {
+    x: [],
+    y: [],
+    velocity: 3,
+    width: 20,
+    height: 60,
+    rate: 3,
+  },
+
   snitch : {
     x: null,
     y: null,
     velocity: 5,
-    width: 30,
-    height: 30,
+    width: 40,
+    height: 40,
+  },
+
+  patronus : {
+    x: null,
+    y: null,
+    velocity: 5,
+    width: 50,
+    height: 50,
   },
 
   score: 0,
@@ -43,7 +60,15 @@ var HoveringHarry = {
 
   obstacleDelay: 0, //to stop massing of obstacles
 
+  lightningDelay: 0,
+
+  patronusDelay: 200,
+
   snitchDelay: 100,
+
+  screenDelay: 0,
+
+  patronusCaught: false,
 
   highestScore: 0,
 
@@ -211,6 +236,57 @@ var HoveringHarry = {
     }
   },
 
+  createLightning: function() {
+    if (this.lightning.x.length < 5) {
+      this.lightning.x.push(800);
+      this.lightning.y.push(Math.floor(Math.random()*500));
+      let x = this.lightning.x[this.lightning.x.length-1];
+      let y = this.lightning.y[this.lightning.y.length-1];
+      this.ctx.save();
+      this.ctx.translate(x, y);
+
+      var cloud = new Image();
+      cloud.src = "http://res.cloudinary.com/arpannln/image/upload/v1518636713/bolt2.png";
+      var that = this;
+      cloud.onload = function() {
+        that.ctx.drawImage(cloud, x, y, that.lightning.width, that.lightning.height);
+      };
+
+      this.ctx.restore();
+    }
+  },
+
+  recreateLightning: function() {
+    if (this.score % 100 === 0 && this.score !== 0) {
+      this.lightning.rate += .05;
+    }
+    for (var i = 0; i < this.lightning.x.length; i++) {
+      let x = this.lightning.x[i];
+      let y = this.lightning.y[i];
+      if (x > -100) {
+        x -= this.lightning.rate;
+        this.lightning.x[i] = x;
+      } else {
+        this.lightning.x.shift();
+        this.lightning.y.shift();
+      }
+
+      this.ctx.save();
+      this.ctx.translate(x, y);
+
+      var cloud = new Image();
+      cloud.src = "http://res.cloudinary.com/arpannln/image/upload/v1518636713/bolt2.png";
+      var that = this;
+      cloud.onload = function() {
+        that.ctx.drawImage(cloud, x, y, that.lightning.width, that.lightning.height);
+      };
+
+      this.ctx.restore();
+    }
+  },
+
+
+
   createSnitch: function() {
     this.snitch.x = 800;
     this.snitch.y = Math.floor(Math.random()*500);
@@ -248,13 +324,65 @@ var HoveringHarry = {
     this.ctx.restore();
   },
 
+
   caughtSnitch: function() {
     if ((this.snitch.x > this.character.x && this.snitch.x < (this.character.x + this.character.width)) &&
-       (this.snitch.y > this.character.y && this.snitch.y < (this.character.y + this.character.height))) {
-         this.score += 1000;
-         this.snitch.y = 900;
-         this.snitch.x = 1500;
-         this.obstacles.rate = 3;
+    (this.snitch.y > this.character.y && this.snitch.y < (this.character.y + this.character.height))) {
+      this.score += 1000;
+      this.snitch.y = 900;
+      this.snitch.x = 1500;
+      this.obstacles.rate = 3;
+    }
+  },
+
+  createPatronus: function() {
+    this.patronus.x = 800;
+    this.patronus.y = Math.floor(Math.random()*500);
+    let x = this.patronus.x;
+    let y = this.patronus.y;
+    this.ctx.save();
+    this.ctx.translate(x, y);
+
+    var patronus = new Image();
+    patronus.src = "https://res.cloudinary.com/arpannln/image/upload/v1518650403/star.jpg";
+    var that = this;
+    patronus.onload = function() {
+      that.ctx.drawImage(patronus, x, y, that.patronus.width, that.patronus.height);
+    };
+
+    this.ctx.restore();
+  },
+
+  recreatePatronus: function() {
+    this.patronus.x -= this.patronus.velocity;
+    let options = [-this.patronus.velocity, this.patronus.velocity];
+    this.patronus.y = this.patronus.y + options[Math.floor(Math.random()*options.length)];
+    let x = this.patronus.x;
+    let y = this.patronus.y;
+    this.ctx.save();
+    this.ctx.translate(x, y);
+
+    var patronus = new Image();
+    patronus.src = "https://res.cloudinary.com/arpannln/image/upload/v1518650403/star.jpg";
+    var that = this;
+    patronus.onload = function() {
+      that.ctx.drawImage(patronus, x, y, that.patronus.width, that.patronus.height);
+    };
+
+    this.ctx.restore();
+  },
+
+  caughtPatronus() {
+    if ((this.patronus.x > this.character.x && this.patronus.x < (this.character.x + this.character.width)) &&
+    (this.patronus.y > this.character.y && this.patronus.y < (this.character.y + this.character.height))) {
+      this.score += 200;
+      this.patronusCaught = true;
+      this.patronus.y = 900;
+      this.patronus.x = 1500;
+      this.obstacles.x = [];
+      this.obstacleDelay = -200;
+      this.obstacles.velocity = 3;
+
     }
   },
   //loop through all the obstacles and see if theres an overlap between character and obs
@@ -337,7 +465,7 @@ var HoveringHarry = {
   displayScore: function() {
     this.ctx.font = '15pt Calibri';
     this.ctx.fillStyle = 'white';
-    this.ctx.fillText(`Highest: ${this.highestScore} Score: ${this.score}`, 600, 40);
+    this.ctx.fillText(`Highest: ${this.highestScore} Score: ${this.score}`, 550, 40);
   },
 
 
@@ -353,13 +481,42 @@ var HoveringHarry = {
       this.obstacleDelay += 1;
     }
     this.recreateObstacles();
+    // if (this.lightningDelay === 50) {
+    //   this.createLightning();
+    //   this.lightningDelay = 0;
+    //   this.score += 10;
+    // } else {
+    //   this.lightningDelay += 1;
+    // }
+    // this.recreateLightning();
     if (this.snitchDelay === 300) {
       this.createSnitch();
       this.snitchDelay = 0;
     } else {
       this.snitchDelay += 1;
     }
+
+    if (this.patronusDelay === 600) {
+      this.createPatronus();
+      this.patronusDelay = 0;
+    } else {
+      this.patronusDelay += 1;
+    }
+
+    if (this.patronusCaught === true ) {
+      this.screenDelay  += 1;
+      this.ctx.fillStyle = "lightblue";
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+
+    if (this.screenDelay === 20) {
+      this.screenDelay = 0;
+      this.patronusCaught = false;
+    }
+
     this.recreateSnitch();
+    this.recreatePatronus();
+    this.caughtPatronus();
     this.caughtSnitch();
     this.checkImpact();
     this.displayScore();
