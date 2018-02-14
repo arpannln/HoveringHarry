@@ -60,14 +60,14 @@ body > img {
 .instructions {
   position: absolute;
   background: black;
-  font-size: 25px;
+  font-size: 20px;
   color: white;
   font-family: "Open Sans";
   display: flex;
-  width: 200px;
+  width: 240px;
   height: 650px;
   margin-top: 0px;
-  margin-left: 1010px;
+  margin-left: 1020px;
   z-index: 1;
   text-align: center;
   justify-content: center;
