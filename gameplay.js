@@ -56,8 +56,8 @@ var HoveringHarry = {
     body.removeChild(child2);
     this.obstacles.x = [];
     this.obstacles.y = [];
-    this.obstacles.velocity = 3;
-    this.obstacles.rate = 3;
+    this.obstacles.velocity = 6;
+    this.obstacles.rate = 6;
     this.gameover = false;
     this.newRender = null;
   },
@@ -183,7 +183,7 @@ var HoveringHarry = {
   },
 
   recreateObstacles: function() {
-    if (this.score % 500 === 0 && this.score !== 0) {
+    if (this.score % 100 === 0 && this.score !== 0) {
       this.obstacles.rate += .05;
     }
     for (var i = 0; i < this.obstacles.x.length; i++) {
@@ -251,7 +251,7 @@ var HoveringHarry = {
   caughtSnitch: function() {
     if ((this.snitch.x > this.character.x && this.snitch.x < (this.character.x + this.character.width)) &&
        (this.snitch.y > this.character.y && this.snitch.y < (this.character.y + this.character.height))) {
-         this.score += 100;
+         this.score += 1000;
          this.snitch.y = 900;
          this.snitch.x = 1500;
          this.obstacles.rate = 3;
