@@ -70,6 +70,8 @@ var HoveringHarry = {
 
   screenDelay: 0,
 
+  renderDelay: 0,
+
   patronusCaught: false,
 
   highestScore: 0,
@@ -80,10 +82,11 @@ var HoveringHarry = {
     let child2 = document.getElementById("HoveringHarryCanvas");
     body.removeChild(child);
     body.removeChild(child2);
+    this.score = 0;
     this.obstacles.x = [];
     this.obstacles.y = [];
-    this.obstacles.velocity = 6;
-    this.obstacles.rate = 6;
+    this.obstacles.velocity = 3;
+    this.obstacles.rate = 3;
     this.gameover = false;
     this.newRender = null;
   },
@@ -215,14 +218,17 @@ var HoveringHarry = {
 
   recreateObstacles: function() {
     if (this.score % 30 === 0 && this.score !== 0) {
-      this.obstacles.rate += .01;
+      this.obstacles.rate += .02;
     }
     for (var i = 0; i < this.obstacles.x.length; i++) {
       let x = this.obstacles.x[i];
       let y = this.obstacles.y[i];
       if (x > -100) {
         x -= this.obstacles.rate;
+        // let options = [-this.obstacles.velocity, this.obstacles.velocity];
+        // y = y + options[Math.floor(Math.random()*options.length)];
         this.obstacles.x[i] = x;
+        this.obstacles.y[i] = y;
       } else {
         this.obstacles.x.shift();
         this.obstacles.y.shift();
@@ -242,54 +248,54 @@ var HoveringHarry = {
     }
   },
 
-  createLightning: function() {
-    if (this.lightning.x.length < 5) {
-      this.lightning.x.push(800);
-      this.lightning.y.push(Math.floor(Math.random()*500));
-      let x = this.lightning.x[this.lightning.x.length-1];
-      let y = this.lightning.y[this.lightning.y.length-1];
-      this.ctx.save();
-      this.ctx.translate(x, y);
-
-      var cloud = new Image();
-      cloud.src = "http://res.cloudinary.com/arpannln/image/upload/v1518636713/bolt2.png";
-      var that = this;
-      cloud.onload = function() {
-        that.ctx.drawImage(cloud, x, y, that.lightning.width, that.lightning.height);
-      };
-
-      this.ctx.restore();
-    }
-  },
-
-  recreateLightning: function() {
-    if (this.score % 100 === 0 && this.score !== 0) {
-      this.lightning.rate += .05;
-    }
-    for (var i = 0; i < this.lightning.x.length; i++) {
-      let x = this.lightning.x[i];
-      let y = this.lightning.y[i];
-      if (x > -100) {
-        x -= this.lightning.rate;
-        this.lightning.x[i] = x;
-      } else {
-        this.lightning.x.shift();
-        this.lightning.y.shift();
-      }
-
-      this.ctx.save();
-      this.ctx.translate(x, y);
-
-      var cloud = new Image();
-      cloud.src = "http://res.cloudinary.com/arpannln/image/upload/v1518636713/bolt2.png";
-      var that = this;
-      cloud.onload = function() {
-        that.ctx.drawImage(cloud, x, y, that.lightning.width, that.lightning.height);
-      };
-
-      this.ctx.restore();
-    }
-  },
+  // createLightning: function() {
+  //   if (this.lightning.x.length < 5) {
+  //     this.lightning.x.push(800);
+  //     this.lightning.y.push(Math.floor(Math.random()*500));
+  //     let x = this.lightning.x[this.lightning.x.length-1];
+  //     let y = this.lightning.y[this.lightning.y.length-1];
+  //     this.ctx.save();
+  //     this.ctx.translate(x, y);
+  //
+  //     var cloud = new Image();
+  //     cloud.src = "http://res.cloudinary.com/arpannln/image/upload/v1518636713/bolt2.png";
+  //     var that = this;
+  //     cloud.onload = function() {
+  //       that.ctx.drawImage(cloud, x, y, that.lightning.width, that.lightning.height);
+  //     };
+  //
+  //     this.ctx.restore();
+  //   }
+  // },
+  //
+  // recreateLightning: function() {
+  //   if (this.score % 100 === 0 && this.score !== 0) {
+  //     this.lightning.rate += .05;
+  //   }
+  //   for (var i = 0; i < this.lightning.x.length; i++) {
+  //     let x = this.lightning.x[i];
+  //     let y = this.lightning.y[i];
+  //     if (x > -100) {
+  //       x -= this.lightning.rate;
+  //       this.lightning.x[i] = x;
+  //     } else {
+  //       this.lightning.x.shift();
+  //       this.lightning.y.shift();
+  //     }
+  //
+  //     this.ctx.save();
+  //     this.ctx.translate(x, y);
+  //
+  //     var cloud = new Image();
+  //     cloud.src = "http://res.cloudinary.com/arpannln/image/upload/v1518636713/bolt2.png";
+  //     var that = this;
+  //     cloud.onload = function() {
+  //       that.ctx.drawImage(cloud, x, y, that.lightning.width, that.lightning.height);
+  //     };
+  //
+  //     this.ctx.restore();
+  //   }
+  // },
 
 
 
@@ -467,7 +473,7 @@ var HoveringHarry = {
     var body = document.getElementById("HoveringHarry");
     body.appendChild(gameover);
     if (this.score > this.highestScore) this.highestScore = this.score;
-    this.score = 0;
+    // this.displayGlobalHighscores();
   },
 
   displayScore: function() {
@@ -476,10 +482,27 @@ var HoveringHarry = {
     this.ctx.fillText(`Highest: ${this.highestScore} Score: ${this.score}`, 550, 40);
   },
 
+  // displayGlobalHighscores: function() {
+  //
+  //   // for (var i = 1; i <= 5; i++) {
+  //   //   if (this.score > Number(document.getElementById(`value${i}`).textContent)) {
+  //   //     let parent = document.getElementById(`highscore${i}`);
+  //   //     let child = document.getElementById(`value${i}`);
+  //   //     parent.
+  //   //   }
+  //   // }
+  //
+  //   var all = fs.readFileSync("./highscores.txt");
+  //   var scores = all.split("\n");
+  //   console.log(scores);
+  //
+  // },
+
 
 
   draw: function() {
     this.ctx.clearRect(0, 0, 800, 500);
+
     this.createCharacter();
     if (this.obstacleDelay === 50) {
       this.createObstacle();
@@ -530,6 +553,8 @@ var HoveringHarry = {
     this.caughtSnitch();
     this.checkImpact();
     this.displayScore();
+    this.ctx.drawImage(this.canvas2, 0, 0);
+
   }
 
 

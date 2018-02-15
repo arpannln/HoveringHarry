@@ -8,10 +8,12 @@
     <link rel="stylesheet" href="design.css">
     <style>
     </style>
+
 </head>
 <body id="HoveringHarry">
   <img class="title" src="https://res.cloudinary.com/arpannln/image/upload/v1518548821/HoveringHarry_Logo.png" alt="">
   <div class="background"> </div>
+
   <p class="instructions">
     <br/> <br/> <br/> &nbsp; Instructions: <br/> Tap Spacebar or Click mouse to dip
     <br/> <br/> <mark class="red"> Dementors </mark> Avoid!
@@ -21,8 +23,8 @@
     <img class="logo2" src="https://res.cloudinary.com/arpannln/image/upload/v1518637342/Hplogo.png" alt="">
   </p>
 
-
 <script src="gameplay.js"></script>
+
 <script>
   var canvas = document.createElement("canvas");
   canvas.id = "HoveringHarryCanvas";
@@ -37,7 +39,6 @@
   ctx.font = '25pt Open Sans';
   ctx.fillStyle = 'white';
   ctx.fillText(`Press Spacebar to Start`, 220, 250);
-  alert(localStorage.getItem("lol"));
   startGame = function(e) {
     if (e.keyCode === 32 && gameStarted === false) {
       gameStarted = true;
@@ -48,5 +49,16 @@
   }
   document.addEventListener("keydown", startGame, false);
 </script>
+
 </body>
+
 </html>
+
+<!--
+<div class="highscores">
+  <div id="highscore1"> <h1 id="value1">0</h1> </div>
+  <div id="highscore2"> <h1 id="value2">0</h1> </div>
+  <div id="highscore3"> <h1 id="value3">0</h1> </div>
+  <div id="highscore4"> <h1 id="value4">0</h1> </div>
+  <div id="highscore5"> <h1 id="value5">0</h1> </div>
+ </div> -->
