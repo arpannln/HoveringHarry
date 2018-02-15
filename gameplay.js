@@ -215,8 +215,8 @@ var HoveringHarry = {
   },
 
   recreateObstacles: function() {
-    if (this.score % 100 === 0 && this.score !== 0) {
-      this.obstacles.rate += .05;
+    if (this.score % 30 === 0 && this.score !== 0) {
+      this.obstacles.rate += .01;
     }
     for (var i = 0; i < this.obstacles.x.length; i++) {
       let x = this.obstacles.x[i];
