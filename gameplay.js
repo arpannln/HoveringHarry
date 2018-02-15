@@ -508,6 +508,8 @@ var HoveringHarry = {
     if (this.patronusCaught === true ) {
       this.screenDelay  += 1;
       this.ctx.fillStyle = "lightblue";
+      this.obstacles.rate = 3;
+      this.obstacles.velocity = 3;
       this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
