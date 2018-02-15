@@ -56,7 +56,7 @@ var HoveringHarry = {
 
   canvas: null,
 
-  canvasPrevious: null,
+  canvas2: null,
 
   gameover: false,
 
@@ -100,7 +100,11 @@ var HoveringHarry = {
     body.appendChild(canvas);
 
     this.ctx = canvas.getContext("2d");
-
+//try to implement 2 canvas to fix double buffering
+    this.canvas2 = document.createElement('canvas');
+    this.canvas2.width = 800;
+    this.canvas2.height = 500;
+    this.ctx2 = this.canvas2.getContext('2d');
     return canvas;
 
   },
@@ -110,6 +114,7 @@ var HoveringHarry = {
     let that = this;
     that.spaceListener = that.spaceListener.bind(this);
     that.stop = that.stop.bind(this);
+    this.draw = this.draw.bind(this);
     document.addEventListener("keyup", that.stop, false);
     document.addEventListener("keydown", that.spaceListener, false);
     this.mouseListener();
@@ -382,7 +387,7 @@ var HoveringHarry = {
       this.patronus.y = 900;
       this.patronus.x = 1500;
       this.obstacles.x = [];
-      this.obstacleDelay = -200;
+      this.obstacleDelay = -100;
       this.obstacles.velocity = 0;
 
     }
