@@ -17,7 +17,7 @@ canvas {
   border-left: 10px solid black;
   border-bottom: 10px solid black;
 }
-div {
+.background {
   position: absolute;
   display: flex;
   background: url(https://res.cloudinary.com/arpannln/image/upload/v1518508152/Dementors4.jpg) no-repeat center center fixed;
@@ -43,7 +43,7 @@ div {
   display: flex;
   width: 480px;
   height: 50px;
-  z-index: 5;
+  z-index: 6;
 }
 
 .title {
@@ -81,18 +81,26 @@ div {
   border-left: 10px solid black;
 }
 
-.logo {
-  width: 100px;
-  height: 100px;
-  margin-top: 60px;
-  margin-bottom: -150px;
-  margin-left: 50px;
+.red {
+  background: none;
+  color: red;
+}
+
+.gold {
+  background: none;
+  color: #B8860B;
+}
+
+
+.lightblue {
+  background: none;
+  color: #00FFFF
 }
 
 .logo2 {
   margin-left: 110px;
-  margin-bottom: -80px;
-  margin-top: 190px;
+  margin-bottom: 0px;
+  margin-top: 100px;
   width: 100px;
   height: 50px;
 }

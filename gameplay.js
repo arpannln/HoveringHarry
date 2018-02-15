@@ -56,6 +56,8 @@ var HoveringHarry = {
 
   canvas: null,
 
+  canvasPrevious: null,
+
   gameover: false,
 
   obstacleDelay: 0, //to stop massing of obstacles
@@ -344,7 +346,7 @@ var HoveringHarry = {
     this.ctx.translate(x, y);
 
     var patronus = new Image();
-    patronus.src = "https://res.cloudinary.com/arpannln/image/upload/v1518650403/star.jpg";
+    patronus.src = "https://res.cloudinary.com/arpannln/image/upload/v1518650822/stars.png";
     var that = this;
     patronus.onload = function() {
       that.ctx.drawImage(patronus, x, y, that.patronus.width, that.patronus.height);
@@ -363,7 +365,7 @@ var HoveringHarry = {
     this.ctx.translate(x, y);
 
     var patronus = new Image();
-    patronus.src = "https://res.cloudinary.com/arpannln/image/upload/v1518650403/star.jpg";
+    patronus.src = "https://res.cloudinary.com/arpannln/image/upload/v1518650822/stars.png";
     var that = this;
     patronus.onload = function() {
       that.ctx.drawImage(patronus, x, y, that.patronus.width, that.patronus.height);
@@ -381,7 +383,7 @@ var HoveringHarry = {
       this.patronus.x = 1500;
       this.obstacles.x = [];
       this.obstacleDelay = -200;
-      this.obstacles.velocity = 3;
+      this.obstacles.velocity = 0;
 
     }
   },
@@ -526,18 +528,3 @@ var HoveringHarry = {
 
 
 };
-
-//white circle incase harry head don't work :(
-//this.ctx.beginPath();
-// this.ctx.arc(this.character.x, this.character.y,5,0,2*Math.PI);
-// this.ctx.stroke();
-// this.ctx.fillStyle = "#ffffff";
-// this.ctx.fill();
-//
-// this.ctx.restore();
-// if (
-//  (!(this.character.y  >= this.obstacles.y[i] + this.obstacles.height ||
-//  this.character.y + this.character.height <= this.obstacles.y[i])) &&
-//  (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*2/5))) &&
-//  (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width*3/5)))
-// ) {
