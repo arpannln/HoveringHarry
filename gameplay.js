@@ -463,6 +463,8 @@ var HoveringHarry = {
     gameover.appendChild(text);
     // gameover.appendChild(text2);
     clearInterval(this.newRender);
+    this.ctx.fillStyle = "black";
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     var body = document.getElementById("HoveringHarry");
     body.appendChild(gameover);
     if (this.score > this.highestScore) this.highestScore = this.score;
