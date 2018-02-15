@@ -24,8 +24,28 @@
 
 <script src="gameplay.js"></script>
 <script>
+  var canvas = document.createElement("canvas");
+  canvas.id = "HoveringHarryCanvas";
+  canvas.width = 800;
+  canvas.height = 500;
 
-  HoveringHarry.init();
+  var body = document.getElementById("HoveringHarry");
+
+  body.appendChild(canvas);
+  var gameStarted = false;
+  let ctx = canvas.getContext('2d');
+  ctx.font = '25pt Open Sans';
+  ctx.fillStyle = 'white';
+  ctx.fillText(`Press Spacebar to Start`, 220, 250);
+  startGame = function(e) {
+    if (e.keyCode === 32 && gameStarted === false) {
+      gameStarted = true;
+      let child2 = document.getElementById("HoveringHarryCanvas");
+      body.removeChild(child2);
+      HoveringHarry.init();
+    }
+  }
+  document.addEventListener("keydown", startGame, false);
 </script>
 </body>
 </html>

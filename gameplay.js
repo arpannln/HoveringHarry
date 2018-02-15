@@ -78,7 +78,6 @@ var HoveringHarry = {
     var body = document.getElementById("HoveringHarry");
     let child = document.getElementById("gameover");
     let child2 = document.getElementById("HoveringHarryCanvas");
-    console.log(child);
     body.removeChild(child);
     body.removeChild(child2);
     this.obstacles.x = [];
