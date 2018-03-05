@@ -13,9 +13,7 @@ canvas {
   position: absolute;
   z-index: 3;
   display: flex;
-  border-top: 10px solid black;
-  border-left: 10px solid black;
-  border-bottom: 10px solid black;
+  border: 10px solid black;
 }
 .background {
   position: absolute;
@@ -53,7 +51,7 @@ canvas {
   color: #FFD700;
   font-family: "Open Sans";
   display: flex;
-  width: 810px;
+  width: 820px;
   height: 150px;
   margin-left: 200px;
   z-index: 1;
@@ -63,22 +61,22 @@ canvas {
 
 .instructions {
   position: absolute;
-  background: black;
+  background: rgba(0, 0, 0, 0.7);
   font-size: 18px;
   color: white;
   font-family: "Open Sans", sans-serif;
   display: flex;
-  width: 200px;
-  height: 650px;
-  margin-top: 0px;
-  margin-left: 1010px;
+  width: 800px;
+  height: 500px;
+  margin-top: 140px;
+  margin-left: 210px;
   font-weight: 300;
-  z-index: 1;
+  z-index: 5;
   text-align: center;
   justify-content: center;
   flex-direction: column;
-  border-right: 15px solid black;
-  border-left: 10px solid black;
+  /* border-right: 15px solid black;
+  border-left: 10px solid black; */
 }
 
 .red {
@@ -98,9 +96,9 @@ canvas {
 }
 
 .logo2 {
-  margin-left: 110px;
+  margin-left: 700px;
   margin-bottom: 0px;
-  margin-top: 100px;
+  margin-top: 50px;
   width: 100px;
   height: 50px;
 }

@@ -14,12 +14,12 @@
   <img class="title" src="https://res.cloudinary.com/arpannln/image/upload/v1518548821/HoveringHarry_Logo.png" alt="">
   <div class="background"> </div>
 
-  <p class="instructions">
+  <p id="instructions" class="instructions">
     <br/> <br/> <br/> &nbsp; Instructions: <br/> Tap Spacebar or Click mouse to dip
     <br/> <br/> <mark class="red"> Dementors </mark> Avoid!
     <br/> <br/> <mark class="gold"> Snitch </mark> Catch to slow Dementors
     <br/> <br/> <mark class="lightblue"> Spell </mark> Expel Dementors
-    <br/> <br/> <br/> &nbsp; Spacebar/Click to Try Again
+    <br/> <br/> <br/> &nbsp; Spacebar/Click to Play
     <img class="logo2" src="https://res.cloudinary.com/arpannln/image/upload/v1518637342/Hplogo.png" alt="">
   </p>
 
@@ -38,11 +38,12 @@
   let ctx = canvas.getContext('2d');
   ctx.font = '25pt Open Sans';
   ctx.fillStyle = 'white';
-  ctx.fillText(`Press Spacebar to Start`, 220, 250);
   startGame = function(e) {
     if (e.keyCode === 32 && gameStarted === false) {
       gameStarted = true;
-      let child2 = document.getElementById("HoveringHarryCanvas");
+      let child = document.getElementById("HoveringHarryCanvas");
+      body.removeChild(child);
+      let child2 = document.getElementById("instructions");
       body.removeChild(child2);
       HoveringHarry.init();
     }
