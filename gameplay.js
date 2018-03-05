@@ -217,7 +217,7 @@ var HoveringHarry = {
   },
 
   recreateObstacles: function() {
-    if (this.score % 30 === 0 && this.score !== 0) {
+    if (this.score % 230 === 0 && this.score !== 0) {
       this.obstacles.rate += .01;
     }
     for (var i = 0; i < this.obstacles.x.length; i++) {
@@ -409,6 +409,7 @@ var HoveringHarry = {
             (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*1/5))) &&
             (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width*2/5)))
           ) {
+            console.log(1);
             this.endGame();
             break;
           }
@@ -418,6 +419,7 @@ var HoveringHarry = {
             (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*1/5))) &&
             (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width*2/5)))
           ) {
+            console.log(2);
             this.endGame();
             break;
           }
@@ -427,6 +429,7 @@ var HoveringHarry = {
          (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*2/5))) &&
          (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width*3/5)))
         ) {
+            console.log(3);
             this.endGame();
             break;
           }
@@ -436,6 +439,7 @@ var HoveringHarry = {
             (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*3/5))) &&
             (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width*4/5)))
           ) {
+            console.log(4);
             this.endGame();
             break;
           }
@@ -445,6 +449,7 @@ var HoveringHarry = {
             (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*4/5))) &&
             (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width)))
           ) {
+            console.log(5);
             this.endGame();
           }
         }

@@ -8,7 +8,7 @@ canvas {
   background: url('https://res.cloudinary.com/arpannln/image/upload/v1518505495/hogwarts-castle-harry-potter-166431.jpg');
   background-repeat: no-repeat;
   background-size: 800px 500px;
-  margin-left: 200px;
+  margin-left: 400px;
   margin-top: 130px;
   position: absolute;
   z-index: 3;
@@ -36,7 +36,7 @@ canvas {
   position: absolute;
   font-size: 45px;
   color: red;
-  margin-left: 420px;
+  margin-left: 620px;
   margin-top: 350px;
   display: flex;
   width: 480px;
@@ -53,7 +53,7 @@ canvas {
   display: flex;
   width: 820px;
   height: 150px;
-  margin-left: 200px;
+  margin-left: 400px;
   z-index: 1;
   text-align: center;
   justify-content: center;
@@ -69,7 +69,7 @@ canvas {
   width: 800px;
   height: 500px;
   margin-top: 140px;
-  margin-left: 210px;
+  margin-left: 410px;
   font-weight: 300;
   z-index: 5;
   text-align: center;
