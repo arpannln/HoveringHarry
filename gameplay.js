@@ -19,10 +19,10 @@ var HoveringHarry = {
   obstacles : {
     x: [],
     y: [],
-    velocity: 3,
+    velocity: 4,
     width: 150,
     height: 80,
-    rate: 3,
+    rate: 4,
   },
 
   lightning : {
@@ -122,7 +122,7 @@ var HoveringHarry = {
     this.mouseListener();
     this.createCharacter();
     this.newRender = setInterval('HoveringHarry.draw()', 16);
-
+    // window.requestAnimationFrame(that.draw);
   },
 
 
@@ -410,7 +410,7 @@ var HoveringHarry = {
             (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*1/5))) &&
             (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width*2/5)))
           ) {
-            console.log(1);
+
             this.endGame();
             break;
           }
@@ -420,7 +420,7 @@ var HoveringHarry = {
             (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*1/5))) &&
             (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width*2/5)))
           ) {
-            console.log(2);
+
             this.endGame();
             break;
           }
@@ -430,7 +430,7 @@ var HoveringHarry = {
          (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*2/5))) &&
          (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width*3/5)))
         ) {
-            console.log(3);
+
             this.endGame();
             break;
           }
@@ -440,7 +440,7 @@ var HoveringHarry = {
             (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*3/5))) &&
             (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width*4/5)))
           ) {
-            console.log(4);
+
             this.endGame();
             break;
           }
@@ -450,7 +450,7 @@ var HoveringHarry = {
             (this.character.x >= (this.obstacles.x[i] + (this.obstacles.width*4/5))) &&
             (this.character.x <= (this.obstacles.x[i] + (this.obstacles.width)))
           ) {
-            console.log(5);
+
             this.endGame();
           }
         }
