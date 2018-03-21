@@ -1,5 +1,5 @@
 # README
-<a href="https://hoveringharry.herokuapp.com"><img width=30% src="https://res.cloudinary.com/arpannln/image/upload/v1518548821/HoveringHarry_Logo.png"></a>
+<a href="https://arpannln.github.io/HoveringHarry/"><img width=30% src="https://res.cloudinary.com/arpannln/image/upload/v1518548821/HoveringHarry_Logo.png"></a>
 
 ### Background and Overview 
 
